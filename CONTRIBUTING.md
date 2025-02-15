@@ -1,4 +1,4 @@
-# Contributing to openapi-runtime-expression
+# Contributing to @swaggerexpert/openapi-runtime-expression
 
 As a contributor, here are the guidelines we would like you to follow:
 
@@ -76,7 +76,7 @@ from the main (upstream) repository:
 * Update your master with the latest upstream version:
 
     ```shell
-    git pull 
+    git pull
     ```
 
 ## <a name="rules"></a> Coding Rules
