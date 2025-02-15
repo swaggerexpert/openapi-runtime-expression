@@ -30,7 +30,7 @@ It supports Runtime Expressions defined in following OpenAPI specification versi
       </td>
       <td valign="middle">
         <a href="https://tidelift.com/subscription/pkg/npm-.swaggerexpert-openapi-runtime-expression?utm_source=npm-swaggerexpert-openapi-runtime-expression&utm_medium=referral&utm_campaign=readme">
-            Get professionally supported @swaggerexpert/cookie with Tidelift Subscription.
+            Get professionally supported @swaggerexpert/openapi-runtime-expression with Tidelift Subscription.
         </a>
       </td>
   </tr>
