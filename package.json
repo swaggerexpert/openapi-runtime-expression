@@ -10,8 +10,7 @@
       "import": "./es/index.mjs",
       "require": "./cjs/index.cjs"
     },
-    "./package.json": "./package.json",
-    "./runtime-expression.bnf": "./src/runtime-expression.bnf"
+    "./package.json": "./package.json"
   },
   "watch": {
     "test": "{src,test}/*.js"
