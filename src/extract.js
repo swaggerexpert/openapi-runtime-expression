@@ -12,7 +12,7 @@ const extract = (openapiRuntimeExpression) => {
   }
 
   const match = openapiRuntimeExpression.match(/^{(?<expression>.+)}$/);
-  return match?.groups?.expression || null;
+  return match?.groups?.expression ?? null;
 };
 
 export default extract;

@@ -2,3 +2,6 @@ node_modules/
 .idea/
 *.iml
 .vscode/settings.json
+/cjs
+/es
+/swaggerexpert-openapi-runtime-expression-*.tgz

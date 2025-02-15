@@ -1,4 +1,10 @@
-openapi-runtime-expression
-Copyright 2022, Vladimír Gorej
-openapi-runtime-expression is licensed under Apache 2.0 license.
+@swaggerexpert/openapi-runtime-expression
+Copyright 2022-2025, Vladimír Gorej
+@swaggerexpert/openapi-runtime-expression is licensed under Apache 2.0 license.
+Copy of the Apache 2.0 license can be found in `LICENSE` file.
+
+OpenAPI Specification 3.1.x
+Copyright The Linux Foundation
+Fragments of the specification text are embedded in `README.md`.
+ABNF grammar is taken directly from OpenAPI Specification.
 Copy of the Apache 2.0 license can be found in `LICENSE` file.

@@ -1,7 +1,6 @@
-import AST from 'apg-js/src/apg-lib/ast.js';
-import Parser from 'apg-js/src/apg-lib/parser.js';
+import { Ast as AST, Parser } from 'apg-lite';
 
-import Grammar from '../runtime-expression.cjs';
+import Grammar from '../runtime-expression.js';
 import expressionCallback from './callbacks/expression.js';
 import sourceCallback from './callbacks/source.js';
 import headerReferenceCallback from './callbacks/header-reference.js';
@@ -13,10 +12,9 @@ import referenceTokenCallback from './callbacks/reference-token.js';
 import nameCallback from './callbacks/name.js';
 import tokenCallback from './callbacks/token.js';
 
-
 const grammar = new Grammar();
 
-const parse = (str) => {
+const parse = (runtimeExpression) => {
   const parser = new Parser();
 
   parser.ast = new AST();
@@ -32,9 +30,9 @@ const parse = (str) => {
   parser.ast.callbacks.name = nameCallback;
   parser.ast.callbacks.token = tokenCallback;
 
-  const result = parser.parse(grammar, 'expression', str);
+  const result = parser.parse(grammar, 'expression', runtimeExpression);
 
   return { result, ast: parser.ast };
-}
+};
 
 export default parse;

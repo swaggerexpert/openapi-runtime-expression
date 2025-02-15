@@ -1,17 +1,12 @@
-import ApgExp from 'apg-js/src/apg-exp/apg-exp.js';
+import parse from './parse/index.js';
 
-import Grammar from './runtime-expression.cjs';
-
-const grammar = new Grammar();
-
-const test = (str, { strict = false } = {}) => {
-  if (typeof str !== 'string') {
+const test = (runtimeExpression) => {
+  try {
+    const parseResult = parse(runtimeExpression);
+    return parseResult.result.success;
+  } catch {
     return false;
   }
-
-  const apgExp = new ApgExp(grammar, 'y');
-  return apgExp.test(str);
 };
 
 export default test;
-
