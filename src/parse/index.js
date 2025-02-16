@@ -10,11 +10,12 @@ import bodyReferenceCallback from './callbacks/body-reference.js';
 import jsonPointerCallback from './callbacks/json-pointer.js';
 import referenceTokenCallback from './callbacks/reference-token.js';
 import nameCallback from './callbacks/name.js';
-import tokenCallback from './callbacks/token.js';
+import { makeToken as makeTokenCallback } from './callbacks/token.js';
+import tokenLowerCaseNormalizer from './token-normalizers/lower-case.js';
 
 const grammar = new Grammar();
 
-const parse = (runtimeExpression) => {
+const parse = (runtimeExpression, { tokenNormalizer = tokenLowerCaseNormalizer } = {}) => {
   const parser = new Parser();
 
   parser.ast = new AST();
@@ -28,7 +29,7 @@ const parse = (runtimeExpression) => {
   parser.ast.callbacks['json-pointer'] = jsonPointerCallback;
   parser.ast.callbacks['reference-token'] = referenceTokenCallback;
   parser.ast.callbacks.name = nameCallback;
-  parser.ast.callbacks.token = tokenCallback;
+  parser.ast.callbacks.token = makeTokenCallback(tokenNormalizer);
 
   const result = parser.parse(grammar, 'expression', runtimeExpression);
 
