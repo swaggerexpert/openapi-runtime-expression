@@ -1,3 +1,20 @@
+/**
+ * Parsing
+ */
+export function parse(runtimeExpression: string, options?: ParseOptions): ParseResult;
+export const tokenLowerCaseNormalizer: TokenLowerCaseNormalizer;
+export const tokenUpperCaseNormalizer: TokenUpperCaseNormalizer;
+
+export interface TokenNormalizer {
+  (token: string): string;
+}
+export interface TokenLowerCaseNormalizer extends TokenNormalizer {
+  <T extends string>(token: T): Lowercase<T>;
+}
+export interface TokenUpperCaseNormalizer extends TokenNormalizer {
+  <T extends string>(token: T): Uppercase<T>;
+}
+
 interface ParseResult {
   readonly result: {
     readonly success: boolean;
@@ -7,6 +24,25 @@ interface ParseResult {
     readonly toXml: () => string;
   };
 }
+
+export interface ParseOptions {
+  readonly tokenNormalizer?: TokenNormalizer;
+}
+
+/**
+ * Testing
+ */
+export function test(runtimeExpression: string): boolean;
+
+/**
+ * Extracting
+ */
+export function extract(openapiRuntimeExpression: string): string;
+
+/**
+ * Grammar
+ */
+export function Grammar(): Grammar;
 
 export interface Grammar {
   grammarObject: string; // Internal identifier
@@ -32,8 +68,3 @@ export type Opcode =
   | { type: 6 | 7; string: number[] }; // TBS or TLS (byte sequence or literal string)
 
 export type UDT = {}; // User-defined terminals (empty in this grammar)
-
-export function parse(runtimeExpression: string): ParseResult;
-export function test(runtimeExpression: string): boolean;
-export function extract(openapiRuntimeExpression: string): string;
-export function Grammar(): Grammar;

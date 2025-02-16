@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { parse } from '../src/index.js'
+import { parse, tokenLowerCaseNormalizer, tokenUpperCaseNormalizer } from '../src/index.js';
 
 describe('parse', function () {
   context('given valid source string', function () {
@@ -12,7 +12,7 @@ describe('parse', function () {
         parseResult.ast.translate(parts);
 
         assert.isTrue(parseResult.result.success);
-        assert.deepEqual(parts, [[ 'expression', '$url']]);
+        assert.deepEqual(parts, [['expression', '$url']]);
       });
     });
 
@@ -54,7 +54,7 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$request.path.id' ],
+          ['expression', '$request.path.id'],
           ['source', 'path.id'],
           ['path-reference', 'path.id'],
           ['name', 'id'],
@@ -91,7 +91,7 @@ describe('parse', function () {
           ['expression', '$request.header.content-Type'],
           ['source', 'header.content-Type'],
           ['header-reference', 'header.content-Type'],
-          ['token', 'content-Type'],
+          ['token', 'content-type'],
         ]);
       });
     });
@@ -122,10 +122,10 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$request.header.Location' ],
+          ['expression', '$request.header.Location'],
           ['source', 'header.Location'],
           ['header-reference', 'header.Location'],
-          ['token', 'Location'],
+          ['token', 'location'],
         ]);
       });
     });
@@ -142,7 +142,7 @@ describe('parse', function () {
           ['expression', '$request.header.Server'],
           ['source', 'header.Server'],
           ['header-reference', 'header.Server'],
-          ['token', 'Server'],
+          ['token', 'server'],
         ]);
       });
     });
@@ -211,7 +211,7 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$request.body#/id' ],
+          ['expression', '$request.body#/id'],
           ['source', 'body#/id'],
           ['body-reference', 'body#/id'],
           ['json-pointer', '/id'],
@@ -229,7 +229,7 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$request.body#/email' ],
+          ['expression', '$request.body#/email'],
           ['source', 'body#/email'],
           ['body-reference', 'body#/email'],
           ['json-pointer', '/email'],
@@ -247,7 +247,7 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$request.body#/user/uuid' ],
+          ['expression', '$request.body#/user/uuid'],
           ['source', 'body#/user/uuid'],
           ['body-reference', 'body#/user/uuid'],
           ['json-pointer', '/user/uuid'],
@@ -266,7 +266,7 @@ describe('parse', function () {
 
         assert.isTrue(parseResult.result.success);
         assert.deepEqual(parts, [
-          ['expression', '$response.body#/uuid' ],
+          ['expression', '$response.body#/uuid'],
           ['source', 'body#/uuid'],
           ['body-reference', 'body#/uuid'],
           ['json-pointer', '/uuid'],
@@ -307,6 +307,67 @@ describe('parse', function () {
           ['body-reference', 'body#/status'],
           ['json-pointer', '/status'],
           ['reference-token', 'status'],
+        ]);
+      });
+    });
+  });
+
+  context('given default token normalization', function () {
+    context('$request.header.Location', function () {
+      specify('should parse and normalize token to lower case', function () {
+        const parseResult = parse('$request.header.Location');
+
+        const parts = [];
+        parseResult.ast.translate(parts);
+
+        assert.isTrue(parseResult.result.success);
+        assert.deepEqual(parts, [
+          ['expression', '$request.header.Location'],
+          ['source', 'header.Location'],
+          ['header-reference', 'header.Location'],
+          ['token', 'location'],
+        ]);
+      });
+    });
+  });
+
+  context('given lower case token normalization', function () {
+    context('$request.header.Location', function () {
+      specify('should parse and normalize token to lower case', function () {
+        const parseResult = parse('$request.header.Location', {
+          tokenNormalizer: tokenLowerCaseNormalizer,
+        });
+
+        const parts = [];
+        parseResult.ast.translate(parts);
+
+        assert.isTrue(parseResult.result.success);
+        assert.deepEqual(parts, [
+          ['expression', '$request.header.Location'],
+          ['source', 'header.Location'],
+          ['header-reference', 'header.Location'],
+          ['token', 'location'],
+        ]);
+      });
+    });
+  });
+
+  context('given upper case token normalization', function () {
+    context('$request.header.Location', function () {
+      specify('should parse and normalize token to upper case', function () {
+        const parseResult = parse('$request.header.Location', {
+          tokenNormalizer: tokenUpperCaseNormalizer,
+        });
+
+        const parts = [];
+        parseResult.ast.translate(parts);
+
+        assert.isTrue(parseResult.result.success);
+        assert.deepEqual(parts, [
+          ['expression', '$request.header.Location'],
+          ['source', 'header.Location'],
+          ['header-reference', 'header.Location'],
+          ['token', 'LOCATION'],
         ]);
       });
     });

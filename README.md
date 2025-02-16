@@ -90,6 +90,57 @@ import { parse } from '@swaggerexpert/openapi-runtime-expression';
 const parseResult = parse('$request.header.accept');
 ```
 
+`token` non-terminal is by default being normalized to lower case.
+
+```js
+import { parse } from '@swaggerexpert/openapi-runtime-expression';
+
+const parseResult = parse('$request.header.Accept');
+const parts = [];
+
+parseResult.ast.translate(parts);
+// [
+//   [ 'expression', '$request.header.Accept' ],
+//   [ 'source', 'header.Accept' ],
+//   [ 'header-reference', 'header.Accept' ],
+//   [ 'token', 'accept' ],
+// ]
+```
+
+`token` normalization can be overridden by passing token normalizer to the `parse` function.
+
+**Upper case**
+
+```js
+import { parse, tokenUpperCaseNormalizer } from '@swaggerexpert/openapi-runtime-expression';
+
+const parseResult = parse('$request.header.Accept', { tokenNormalizer: tokenUpperCaseNormalizer });
+const parts = [];
+parseResult.ast.translate(parts);
+// [
+//   [ 'expression', '$request.header.Accept' ],
+//   [ 'source', 'header.Accept' ],
+//   [ 'header-reference', 'header.Accept' ],
+//   [ 'token', 'ACCEPT' ],
+// ]`
+```
+
+**Lower case**
+
+```js
+import { parse, tokenLowerCaseNormalizer } from '@swaggerexpert/openapi-runtime-expression';
+
+const parseResult = parse('$request.header.Accept', { tokenNormalizer: tokenLowerCaseNormalizer });
+const parts = [];
+parseResult.ast.translate(parts);
+// [
+//   [ 'expression', '$request.header.Accept' ],
+//   [ 'source', 'header.Accept' ],
+//   [ 'header-reference', 'header.Accept' ],
+//   [ 'token', 'accept' ],
+// ]`
+```
+
 **parseResult** variable has the following shape:
 
 ```
@@ -145,10 +196,10 @@ After running the above code, **parts** variable has the following shape:
 
 ```js
 [
-  ['expression', '$request.query.queryUrl' ],
-  ['source', 'query.queryUrl'],
-  ['query-reference', 'query.queryUrl'],
-  ['name', 'queryUrl'],
+  [ 'expression', '$request.header.accept' ],
+  [ 'source', 'header.accept' ],
+  [ 'header-reference', 'header.accept' ],
+  [ 'token', 'accept' ],
 ]
 ```
 
