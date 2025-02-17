@@ -26,7 +26,6 @@ const parse = (runtimeExpression, { tokenNormalizer = tokenLowerCaseNormalizer }
   parser.ast.callbacks['path-reference'] = pathReferenceCallback;
   parser.ast.callbacks['body-reference'] = bodyReferenceCallback;
   parser.ast.callbacks['json-pointer'] = jsonPointerCallback;
-  parser.ast.callbacks['json-pointer'] = jsonPointerCallback;
   parser.ast.callbacks['reference-token'] = referenceTokenCallback;
   parser.ast.callbacks.name = nameCallback;
   parser.ast.callbacks.token = makeTokenCallback(tokenNormalizer);
