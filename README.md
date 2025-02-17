@@ -206,7 +206,7 @@ After running the above code, **parts** variable has the following shape:
 ###### Interpreting AST as XML
 
 ```js
-import { parse } from 'openapi-runtime-expression';
+import { parse } from '@swaggerexpert/openapi-runtime-expression';
 
 const parseResult = parse('$request.header.accept');
 const xml = parseResult.ast.toXml();
