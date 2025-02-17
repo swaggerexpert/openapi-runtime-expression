@@ -1,6 +1,6 @@
 # @swaggerexpert/openapi-runtime-expression
 
-[![npmversion](https://badge.fury.io/js/@swaggerexpert%2Fopenapi-runtime-expression.svg)](https://www.npmjs.com/package/@swaggerexpert/openapi-runtime-expression)
+[![npmversion](https://img.shields.io/npm/v/%40swaggerexpert%2Fopenapi-runtime-expression?style=flat-square&label=npm%20package&color=%234DC81F&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40swaggerexpert%2Fopenapi-runtime-expression)](https://www.npmjs.com/package/@swaggerexpert/openapi-runtime-expression)
 [![npm](https://img.shields.io/npm/dm/@swaggerexpert/openapi-runtime-expression)](https://www.npmjs.com/package/@swaggerexpert/openapi-runtime-expression)
 [![Test workflow](https://github.com/swaggerexpert/openapi-runtime-expression/actions/workflows/test.yml/badge.svg)](https://github.com/swaggerexpert/openapi-runtime-expression/actions)
 [![Dependabot enabled](https://img.shields.io/badge/Dependabot-enabled-blue.svg)](https://dependabot.com/)
