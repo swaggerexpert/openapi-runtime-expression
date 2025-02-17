@@ -33,11 +33,11 @@ export default function grammar(){
   this.rules[3] = { name: 'query-reference', lower: 'query-reference', index: 3, isBkr: false };
   this.rules[4] = { name: 'path-reference', lower: 'path-reference', index: 4, isBkr: false };
   this.rules[5] = { name: 'body-reference', lower: 'body-reference', index: 5, isBkr: false };
-  this.rules[6] = { name: 'json-pointer', lower: 'json-pointer', index: 6, isBkr: false };
-  this.rules[7] = { name: 'reference-token', lower: 'reference-token', index: 7, isBkr: false };
-  this.rules[8] = { name: 'unescaped', lower: 'unescaped', index: 8, isBkr: false };
-  this.rules[9] = { name: 'escaped', lower: 'escaped', index: 9, isBkr: false };
-  this.rules[10] = { name: 'name', lower: 'name', index: 10, isBkr: false };
+  this.rules[6] = { name: 'name', lower: 'name', index: 6, isBkr: false };
+  this.rules[7] = { name: 'json-pointer', lower: 'json-pointer', index: 7, isBkr: false };
+  this.rules[8] = { name: 'reference-token', lower: 'reference-token', index: 8, isBkr: false };
+  this.rules[9] = { name: 'unescaped', lower: 'unescaped', index: 9, isBkr: false };
+  this.rules[10] = { name: 'escaped', lower: 'escaped', index: 10, isBkr: false };
   this.rules[11] = { name: 'token', lower: 'token', index: 11, isBkr: false };
   this.rules[12] = { name: 'tchar', lower: 'tchar', index: 12, isBkr: false };
   this.rules[13] = { name: 'CHAR', lower: 'char', index: 13, isBkr: false };
@@ -82,13 +82,13 @@ export default function grammar(){
   this.rules[3].opcodes = [];
   this.rules[3].opcodes[0] = { type: 2, children: [1,2] };// CAT
   this.rules[3].opcodes[1] = { type: 7, string: [113,117,101,114,121,46] };// TLS
-  this.rules[3].opcodes[2] = { type: 4, index: 10 };// RNM(name)
+  this.rules[3].opcodes[2] = { type: 4, index: 6 };// RNM(name)
 
   /* path-reference */
   this.rules[4].opcodes = [];
   this.rules[4].opcodes[0] = { type: 2, children: [1,2] };// CAT
   this.rules[4].opcodes[1] = { type: 7, string: [112,97,116,104,46] };// TLS
-  this.rules[4].opcodes[2] = { type: 4, index: 10 };// RNM(name)
+  this.rules[4].opcodes[2] = { type: 4, index: 6 };// RNM(name)
 
   /* body-reference */
   this.rules[5].opcodes = [];
@@ -97,41 +97,41 @@ export default function grammar(){
   this.rules[5].opcodes[2] = { type: 3, min: 0, max: 1 };// REP
   this.rules[5].opcodes[3] = { type: 2, children: [4,5] };// CAT
   this.rules[5].opcodes[4] = { type: 7, string: [35] };// TLS
-  this.rules[5].opcodes[5] = { type: 4, index: 6 };// RNM(json-pointer)
-
-  /* json-pointer */
-  this.rules[6].opcodes = [];
-  this.rules[6].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
-  this.rules[6].opcodes[1] = { type: 2, children: [2,3] };// CAT
-  this.rules[6].opcodes[2] = { type: 7, string: [47] };// TLS
-  this.rules[6].opcodes[3] = { type: 4, index: 7 };// RNM(reference-token)
-
-  /* reference-token */
-  this.rules[7].opcodes = [];
-  this.rules[7].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
-  this.rules[7].opcodes[1] = { type: 1, children: [2,3] };// ALT
-  this.rules[7].opcodes[2] = { type: 4, index: 8 };// RNM(unescaped)
-  this.rules[7].opcodes[3] = { type: 4, index: 9 };// RNM(escaped)
-
-  /* unescaped */
-  this.rules[8].opcodes = [];
-  this.rules[8].opcodes[0] = { type: 1, children: [1,2,3] };// ALT
-  this.rules[8].opcodes[1] = { type: 5, min: 0, max: 46 };// TRG
-  this.rules[8].opcodes[2] = { type: 5, min: 48, max: 125 };// TRG
-  this.rules[8].opcodes[3] = { type: 5, min: 127, max: 1114111 };// TRG
-
-  /* escaped */
-  this.rules[9].opcodes = [];
-  this.rules[9].opcodes[0] = { type: 2, children: [1,2] };// CAT
-  this.rules[9].opcodes[1] = { type: 7, string: [126] };// TLS
-  this.rules[9].opcodes[2] = { type: 1, children: [3,4] };// ALT
-  this.rules[9].opcodes[3] = { type: 7, string: [48] };// TLS
-  this.rules[9].opcodes[4] = { type: 7, string: [49] };// TLS
+  this.rules[5].opcodes[5] = { type: 4, index: 7 };// RNM(json-pointer)
 
   /* name */
+  this.rules[6].opcodes = [];
+  this.rules[6].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
+  this.rules[6].opcodes[1] = { type: 4, index: 13 };// RNM(CHAR)
+
+  /* json-pointer */
+  this.rules[7].opcodes = [];
+  this.rules[7].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
+  this.rules[7].opcodes[1] = { type: 2, children: [2,3] };// CAT
+  this.rules[7].opcodes[2] = { type: 7, string: [47] };// TLS
+  this.rules[7].opcodes[3] = { type: 4, index: 8 };// RNM(reference-token)
+
+  /* reference-token */
+  this.rules[8].opcodes = [];
+  this.rules[8].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
+  this.rules[8].opcodes[1] = { type: 1, children: [2,3] };// ALT
+  this.rules[8].opcodes[2] = { type: 4, index: 9 };// RNM(unescaped)
+  this.rules[8].opcodes[3] = { type: 4, index: 10 };// RNM(escaped)
+
+  /* unescaped */
+  this.rules[9].opcodes = [];
+  this.rules[9].opcodes[0] = { type: 1, children: [1,2,3] };// ALT
+  this.rules[9].opcodes[1] = { type: 5, min: 0, max: 46 };// TRG
+  this.rules[9].opcodes[2] = { type: 5, min: 48, max: 125 };// TRG
+  this.rules[9].opcodes[3] = { type: 5, min: 127, max: 1114111 };// TRG
+
+  /* escaped */
   this.rules[10].opcodes = [];
-  this.rules[10].opcodes[0] = { type: 3, min: 0, max: Infinity };// REP
-  this.rules[10].opcodes[1] = { type: 4, index: 13 };// RNM(CHAR)
+  this.rules[10].opcodes[0] = { type: 2, children: [1,2] };// CAT
+  this.rules[10].opcodes[1] = { type: 7, string: [126] };// TLS
+  this.rules[10].opcodes[2] = { type: 1, children: [3,4] };// ALT
+  this.rules[10].opcodes[3] = { type: 7, string: [48] };// TLS
+  this.rules[10].opcodes[4] = { type: 7, string: [49] };// TLS
 
   /* token */
   this.rules[11].opcodes = [];
@@ -221,6 +221,7 @@ export default function grammar(){
     str += "query-reference  = \"query.\" name\n";
     str += "path-reference   = \"path.\" name\n";
     str += "body-reference   = \"body\" [\"#\" json-pointer ]\n";
+    str += "name             = *( CHAR )\n";
     str += "\n";
     str += "; https://datatracker.ietf.org/doc/html/rfc6901#section-3\n";
     str += "json-pointer     = *( \"/\" reference-token )\n";
@@ -229,10 +230,13 @@ export default function grammar(){
     str += "                 ; %x2F ('/') and %x7E ('~') are excluded from 'unescaped'\n";
     str += "escaped          = \"~\" ( \"0\" / \"1\" )\n";
     str += "                 ; representing '~' and '/', respectively\n";
-    str += "name             = *( CHAR )\n";
-    str += "token            = 1*tchar\n";
-    str += "tchar            = \"!\" / \"#\" / \"$\" / \"%\" / \"&\" / \"'\" / \"*\" / \"+\" / \"-\" / \".\"\n";
-    str += "                 / \"^\" /\"_\" / \"`\" / \"|\" / \"~\" / DIGIT / ALPHA\n";
+    str += "\n";
+    str += "; https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6\n";
+    str += "token          = 1*tchar\n";
+    str += "tchar          = \"!\" / \"#\" / \"$\" / \"%\" / \"&\" / \"'\" / \"*\"\n";
+    str += "               / \"+\" / \"-\" / \".\" / \"^\" / \"_\" / \"`\" / \"|\" / \"~\"\n";
+    str += "               / DIGIT / ALPHA\n";
+    str += "               ; any VCHAR, except delimiters\n";
     str += "\n";
     str += "; https://www.rfc-editor.org/rfc/rfc7159#section-7\n";
     str += "CHAR = unescape /\n";
